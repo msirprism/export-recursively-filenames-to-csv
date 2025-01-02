@@ -44,10 +44,11 @@ def list_files_recursively(root_dir: str) -> List[Dict[str, str]]:
                 except ValueError:
                     relative_parent = file_path.parent
                 
-                # Remove .docx extension from the file name
+                # Remove .docx extension and normalize case of the file name
                 file_name = file_path.name
                 if file_name.endswith('.docx'):
                     file_name = file_name[:-5]  # Remove the last 5 characters (.docx)
+                file_name = file_name.lower()  # Convert to lowercase
                 
                 files_info.append({
                     'chemin_complet': str(file_path),
