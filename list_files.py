@@ -44,12 +44,17 @@ def list_files_recursively(root_dir: str) -> List[Dict[str, str]]:
                 except ValueError:
                     relative_parent = file_path.parent
                 
+                # Remove .docx extension from the file name
+                file_name = file_path.name
+                if file_name.endswith('.docx'):
+                    file_name = file_name[:-5]  # Remove the last 5 characters (.docx)
+                
                 files_info.append({
                     'chemin_complet': str(file_path),
-                    'nom_fichier': file_path.name,
+                    'nom_fichier': file_name,
                     'dossier_parent': str(relative_parent)
                 })
-                print(f"Fichier trouvé: {file_path.name}")
+                print(f"Fichier trouvé: {file_name}")
     except Exception as e:
         print(f"Erreur lors du parcours du répertoire: {e}")
         return []
